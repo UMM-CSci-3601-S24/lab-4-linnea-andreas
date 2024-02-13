@@ -19,7 +19,7 @@ private readonly bodyKey = 'body'
 constructor(private httpClient: HttpClient) {
 }
 
-getTodos() : Observable<todo[]> {
+getTodos() : Observable<Todo[]> {
   let httpParams: HttpParams = new HttpParams();
 
 

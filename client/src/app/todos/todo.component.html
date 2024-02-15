@@ -1,14 +1,110 @@
+
 <div class="flex-row">
-  <div class="flex-1">
-    <mat-card class="home-card">
-      <mat-card-header>
-        <mat-card-title>
-          Todo
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        Todo Page Works!
-      </mat-card-content>
-    </mat-card>
+  <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
+
+    <mat-card appearance="outlined" class="search-card">
+      <mat-card-title class="todo-list-title">Todos</mat-card-title>
+<!--       <mat-card-content class="flex-col" >
+ -->
+        <div class="flex-row gap-10 flex-wrap">
+
+          <mat-form-field class="input-field">
+            <mat-label>Owner</mat-label>
+            <!-- <input matInput data-test="todoOwnerInput" placeholder="Filter by owner"
+              [(ngModel)]="todoOwner" (input)="updateFilter()"> -->
+              <input matInput placeholder="Filter by owner">
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Body</mat-label>
+            <!-- <input matInput data-test="todoBodyInput" placeholder="Filter by body"
+              [(ngModel)]="todoBody" (input)="updateFilter()"> -->
+              <input matInput placeholder="Filter by body">
+          </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Status</mat-label>
+          <!--<mat-select (selectionChange)="updateFilter()" [(ngModel)]="todoStatus" data-test="todoStatusSelect"> -->
+          <mat-select data-test="todoStatusSelect">
+            <mat-option [value]= 'true'>Complete</mat-option>
+            <mat-option [value]= 'false'>Incomplete</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+          <mat-form-field class="input-field">
+            <mat-label>Category</mat-label>
+            <!-- <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoCategory" data-test="todoCategorySelect"> -->
+            <mat-select data-test="todoCategorySelect">
+              <mat-option value="groceries">Groceries</mat-option>
+              <mat-option value="homework">Homework</mat-option>
+              <mat-option value="software design">Software Design</mat-option>
+              <mat-option value="video games">Video Games</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+        <!-- <label for="viewType">View type: </label>
+        <mat-radio-group aria-label="View type" [(ngModel)]="viewType" data-test="viewTypeRadio">
+          <mat-radio-button value="card">Card</mat-radio-button>
+          <mat-radio-button value="list">List</mat-radio-button>
+        </mat-radio-group> -->
+
+        <mat-form-field class="input-field">
+          <mat-label>Sort by</mat-label>
+          <!-- <mat-select (selectionChange)="updateSorting()" [(ngModel)]="todoSortBy" data-test="todoSortSelect"> -->
+          <mat-select data-test="todoSortSelect">
+            <mat-option value="_id">ID</mat-option>
+            <mat-option value="owner">Owner</mat-option>
+            <mat-option value="status">Status</mat-option>
+            <mat-option value="category">Category</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Limit</mat-label>
+          <!-- <input matInput [(ngModel)]="displayLimit" (input)="updateLimit()" type="number" placeholder="Number of items to display"> -->
+          <input matInput placeholder="Number of Todos">
+        </mat-form-field>
+
+        </div>
+     </mat-card>
+    </div>
   </div>
-</div>
+
+  <!-- <div class="flex-row">
+    @if (serverFilteredTodos) {
+      <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" >
+        <div>
+          <mat-card appearance="outlined">
+            <mat-card-content>
+              <mat-nav-list class="todo-nav-list">
+                <h3 mat-subheader>Todos</h3>
+                @for (todo of this.filteredTodos; track todo._id) {
+                  <a mat-list-item [routerLink]="['/todos', todo._id]" class="todo-list-item">
+                    <span matListItemTitle mat-line class="todo-list-owner"> {{todo.owner}} </span>
+                    <span matListItemLine class="todo-list-body"> {{todo.body}} </span>
+                    <span matListItemLine class="todo-list-status"> {{todo.status}} </span>
+                  </a>
+                }
+              </mat-nav-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    } @else {
+      <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="user-error">
+        <mat-error>
+          There was a problem loading the users. Possibly the server is down or perhaps there are network
+          issues.
+        </mat-error>
+        <mat-error>
+          Error message: {{ this.errMsg }}
+        </mat-error>
+        <mat-error>
+          Please wait a bit and try again or start the server.
+        </mat-error>
+      </div>
+    }
+
+  </div> -->

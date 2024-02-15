@@ -6,6 +6,7 @@ import { UserProfileComponent } from './users/user-profile.component';
 import { AddUserComponent } from './users/add-user.component';
 import { CompanyListComponent } from './company-list/company-list.component';
 import { TodoComponent } from './todos/todo.component';
+import { AddTodoComponent } from './todos/add-todo.component';
 
 // Note that the 'users/new' route needs to come before 'users/:id'.
 // If 'users/:id' came first, it would accidentally catch requests to
@@ -17,6 +18,8 @@ const routes: Routes = [
   {path: 'users/:id', component: UserProfileComponent, title: 'User Profile'},
   {path: 'companies', component: CompanyListComponent, title: 'Companies'},
   {path: 'todos', component: TodoComponent, title: 'Todos'},
+  {path: 'todos/new', component: AddTodoComponent, title: 'Add Todo'},
+
 ];
 
 @NgModule({

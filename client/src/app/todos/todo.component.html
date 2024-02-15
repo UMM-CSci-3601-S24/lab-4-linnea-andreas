@@ -4,9 +4,17 @@
 
     <mat-card appearance="outlined" class="search-card">
       <mat-card-title class="todo-list-title">Todos</mat-card-title>
-<!--       <mat-card-content class="flex-col" >
- -->
+
         <div class="flex-row gap-10 flex-wrap">
+
+          <mat-form-field class="input-field">
+            <mat-label>Status</mat-label>
+            <!--<mat-select (selectionChange)="updateFilter()" [(ngModel)]="todoStatus" data-test="todoStatusSelect"> -->
+            <mat-select>
+              <mat-option [value]= 'true'>Complete</mat-option>
+              <mat-option [value]= 'false'>Incomplete</mat-option>
+            </mat-select>
+          </mat-form-field>
 
           <mat-form-field class="input-field">
             <mat-label>Owner</mat-label>
@@ -22,20 +30,10 @@
               <input matInput placeholder="Filter by body">
           </mat-form-field>
 
-        <mat-form-field class="input-field">
-          <mat-label>Status</mat-label>
-          <!--<mat-select (selectionChange)="updateFilter()" [(ngModel)]="todoStatus" data-test="todoStatusSelect"> -->
-          <mat-select data-test="todoStatusSelect">
-            <mat-option [value]= 'true'>Complete</mat-option>
-            <mat-option [value]= 'false'>Incomplete</mat-option>
-          </mat-select>
-        </mat-form-field>
-
-
           <mat-form-field class="input-field">
             <mat-label>Category</mat-label>
             <!-- <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoCategory" data-test="todoCategorySelect"> -->
-            <mat-select data-test="todoCategorySelect">
+            <mat-select>
               <mat-option value="groceries">Groceries</mat-option>
               <mat-option value="homework">Homework</mat-option>
               <mat-option value="software design">Software Design</mat-option>
@@ -43,20 +41,13 @@
             </mat-select>
           </mat-form-field>
 
-
-        <!-- <label for="viewType">View type: </label>
-        <mat-radio-group aria-label="View type" [(ngModel)]="viewType" data-test="viewTypeRadio">
-          <mat-radio-button value="card">Card</mat-radio-button>
-          <mat-radio-button value="list">List</mat-radio-button>
-        </mat-radio-group> -->
-
         <mat-form-field class="input-field">
           <mat-label>Sort by</mat-label>
           <!-- <mat-select (selectionChange)="updateSorting()" [(ngModel)]="todoSortBy" data-test="todoSortSelect"> -->
           <mat-select data-test="todoSortSelect">
-            <mat-option value="_id">ID</mat-option>
             <mat-option value="owner">Owner</mat-option>
             <mat-option value="status">Status</mat-option>
+            <mat-option value="_body">Body</mat-option>
             <mat-option value="category">Category</mat-option>
           </mat-select>
         </mat-form-field>
@@ -72,7 +63,12 @@
     </div>
   </div>
 
-  <!-- <div class="flex-row">
+  <button mat-fab class="add-todo-fab" matTooltip="Add Todo" matTooltipPosition="left" routerLink="/todos/new" data-test="addTodoButton">
+    <mat-icon class="md-24" aria-label="Add Todo">add</mat-icon>
+  </button>
+
+  <!--
+    <div class="flex-row">
     @if (serverFilteredTodos) {
       <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" >
         <div>
@@ -106,5 +102,5 @@
         </mat-error>
       </div>
     }
-
-  </div> -->
+  </div>
+-->

@@ -9,11 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatHint, MatError } from '@angular/material/form-field';
 import { MatCard, MatCardTitle, MatCardContent, MatCardHeader } from '@angular/material/card';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-todo',
   standalone: true,
-  imports: [MatCardHeader, MatCard, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, FormsModule, MatHint, MatSelect, MatOption, MatRadioGroup, MatRadioButton, MatNavList, MatListSubheaderCssMatStyler, MatListItem, RouterLink, MatListItemAvatar, MatListItemTitle, MatListItemLine, MatError],
+  imports: [ MatIcon,MatCardHeader, MatCard, MatCardTitle, MatCardContent, MatFormField, MatLabel, MatInput, FormsModule, MatHint, MatSelect, MatOption, MatRadioGroup, MatRadioButton, MatNavList, MatListSubheaderCssMatStyler, MatListItem, RouterLink, MatListItemAvatar, MatListItemTitle, MatListItemLine, MatError],
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.scss'
 })

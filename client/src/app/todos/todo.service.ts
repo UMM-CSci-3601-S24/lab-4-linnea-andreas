@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { Todo } from './todo';
-import { map } from 'rxjs/operators';
-import { Company } from '../company-list/company';
+//import { map } from 'rxjs/operators';
+//import { Company } from '../company-list/company';
 
 @Injectable({
   providedIn: `root`
@@ -20,7 +20,8 @@ constructor(private httpClient: HttpClient) {
 }
 
 getTodos() : Observable<Todo[]> {
-  let httpParams: HttpParams = new HttpParams();
+  //httpParams should be changed to let instead
+  const httpParams: HttpParams = new HttpParams();
 
 
   return this.httpClient.get<Todo[]>(this.todoUrl, {

@@ -75,8 +75,28 @@ describe('TodoService', () => {
         expect(mockedMethod)
           .withContext('talks to the correct endpoint')
           .toHaveBeenCalledWith(todoService.todoUrl, { params: new HttpParams() });
-      })
-    }))
-  })
+      });
+    }));
+  });
 
+  describe('getTodoById()', () => {
+    it('calls api/todos/id with the correct URL', () => {
+      const targetTodo: Todo = testTodos[1];
+      const targetId: string = targetTodo._id;
+
+      // Mock the `httpClient.get()` method so that instead of making an HTTP request
+      // it just returns one user from our test data
+      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(targetTodo));
+
+      todoService.getTodoById(targetId).subscribe((todo) => {
+        expect(todo).withContext('returns the target todo').toBe(targetTodo);
+      })
+      expect(mockedMethod)
+      .withContext('one call')
+      .toHaveBeenCalledTimes(1);
+       expect(mockedMethod)
+      .withContext('talks to the correct endpoint')
+      .toHaveBeenCalledWith(`${todoService.todoUrl}/${targetId}`);
+    })
+    })
 });

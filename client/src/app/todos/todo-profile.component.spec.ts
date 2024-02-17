@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { throwError } from 'rxjs';
 import { ActivatedRouteStub } from '../../testing/activated-route-stub';
-import { MockTodoService } from '/home/gilb0348/SoftwareDevClass/lab-4-linnea-andreas/client/src/testing/todo.service.mock';
+import { MockTodoService } from 'src/testing/todo.service.mock';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
 import { TodoComponent } from './todo.component';

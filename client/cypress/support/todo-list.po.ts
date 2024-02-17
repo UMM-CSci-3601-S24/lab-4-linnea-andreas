@@ -1,7 +1,7 @@
 export class TodoListPage{
   private readonly baseUrl = './todos';
   private readonly pageTitle = 'todo-list-title';
-  private readonly todoCardSelector = '.todo-cards-container app-todo'
+  private readonly todoCardSelector = '.todo-cards-container app-todo-card'
   private readonly todoListItemsSelector = '.todo-nav-list .todo-list-item';
   private readonly userListItemsSelector = '.user-nav-list .user-list-item';
   private readonly profileButtonSelector = '[data-test=viewProfileButton]';

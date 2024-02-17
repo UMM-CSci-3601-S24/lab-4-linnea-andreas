@@ -8,7 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { MatListModule } from '@angular/material/list';
-import { TodoComponent } from './todo.component';
+import { TodoCardComponent } from './todo-card.component';
 
 import { MatRadioModule } from '@angular/material/radio';
 import { MatOptionModule } from '@angular/material/core';
@@ -23,7 +23,7 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: 'todo-list.component.html',
   styleUrls: ['./todo-list.component.scss'],
   standalone: true,
-  imports: [MatCardModule, MatFormFieldModule, MatInputModule, FormsModule, MatSelectModule, MatOptionModule, MatRadioModule, TodoComponent, MatListModule, RouterLink, MatButtonModule, MatTooltipModule, MatIconModule]
+  imports: [MatCardModule, MatFormFieldModule, MatInputModule, FormsModule, MatSelectModule, MatOptionModule, MatRadioModule, TodoCardComponent, MatListModule, RouterLink, MatButtonModule, MatTooltipModule, MatIconModule]
 })
 
 export class TodoListComponent implements OnInit, OnDestroy {

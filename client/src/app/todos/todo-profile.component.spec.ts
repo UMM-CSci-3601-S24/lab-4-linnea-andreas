@@ -7,7 +7,7 @@ import { ActivatedRouteStub } from '../../testing/activated-route-stub';
 import { MockTodoService } from 'src/testing/todo.service.mock';
 import { Todo } from './todo';
 import { TodoService } from './todo.service';
-import { TodoComponent } from './todo.component';
+import { TodoCardComponent } from './todo-card.component';
 import { TodoProfileComponent } from './todo-profile.component';
 
 describe('TodoProfileComponent', () => {
@@ -26,7 +26,7 @@ beforeEach(waitForAsync(() => {
   imports: [
       RouterTestingModule,
       MatCardModule,
-      TodoProfileComponent, TodoComponent
+      TodoProfileComponent, TodoCardComponent
   ],
   providers: [
       { provide: TodoService, useValue: mockTodoService },

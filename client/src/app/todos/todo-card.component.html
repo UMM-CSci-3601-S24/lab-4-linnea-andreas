@@ -1,0 +1,39 @@
+
+
+  <!--
+    <div class="flex-row">
+    @if (serverFilteredTodos) {
+      <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" >
+        <div>
+          <mat-card appearance="outlined">
+            <mat-card-content>
+              <mat-nav-list class="todo-nav-list">
+                <h3 mat-subheader>Todos</h3>
+                @for (todo of this.filteredTodos; track todo._id) {
+                  <a mat-list-item [routerLink]="['/todos', todo._id]" class="todo-list-item">
+                    <span matListItemTitle mat-line class="todo-list-owner"> {{todo.owner}} </span>
+                    <span matListItemLine class="todo-list-body"> {{todo.body}} </span>
+                    <span matListItemLine class="todo-list-status"> {{todo.status}} </span>
+                  </a>
+                }
+              </mat-nav-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    } @else {
+      <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="user-error">
+        <mat-error>
+          There was a problem loading the users. Possibly the server is down or perhaps there are network
+          issues.
+        </mat-error>
+        <mat-error>
+          Error message: {{ this.errMsg }}
+        </mat-error>
+        <mat-error>
+          Please wait a bit and try again or start the server.
+        </mat-error>
+      </div>
+    }
+  </div>
+-->

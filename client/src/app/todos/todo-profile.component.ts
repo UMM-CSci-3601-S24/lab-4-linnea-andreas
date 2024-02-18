@@ -5,7 +5,7 @@ import { Todo } from './todo';
 import { TodoService } from './todo.service';
 import { Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs/operators';
-import { TodoComponent } from './todo.component';
+import { TodoCardComponent } from './todo-card.component';
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
@@ -13,7 +13,7 @@ import { MatCardModule } from '@angular/material/card';
   templateUrl: './todo-profile.component.html',
   styleUrls: ['./todo-profile.component.scss'],
   standalone: true,
-  imports: [TodoComponent, MatCardModule]
+  imports: [TodoCardComponent, MatCardModule]
 })
 export class TodoProfileComponent implements OnInit, OnDestroy {
   todo: Todo;

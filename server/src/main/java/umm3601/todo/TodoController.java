@@ -30,7 +30,7 @@ import io.javalin.http.HttpStatus;
 import io.javalin.http.NotFoundResponse;
 import umm3601.Controller;
 
-public class TodoController implements Controller{
+public class TodoController implements Controller {
 
   private static final String API_TODOS = "/api/todos";
   private static final String API_TODO_BY_ID = "/api/todos/{id}";
@@ -66,7 +66,7 @@ public class TodoController implements Controller{
     } catch (IllegalArgumentException e) {
       throw new BadRequestResponse("The requested todo id wasn't a legal Mongo Object ID.");
     }
-    if(todo == null) {
+    if (todo == null) {
       throw new NotFoundResponse("The requested todo was not found");
     } else {
       ctx.json(todo);
@@ -97,7 +97,7 @@ public void getTodos(Context ctx) {
 private Bson constructFilter(Context ctx) {
   List<Bson> filters = new ArrayList<>();
 
-  if(ctx.queryParamMap().containsKey(STATUS_KEY)) {
+  if (ctx.queryParamMap().containsKey(STATUS_KEY)) {
     boolean targetStatus = ctx.queryParamAsClass(STATUS_KEY, Boolean.class)
     .get();
     filters.add(eq(STATUS_KEY, targetStatus));

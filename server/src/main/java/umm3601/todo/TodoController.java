@@ -2,16 +2,16 @@ package umm3601.todo;
 
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
+/* import static com.mongodb.client.model.Filters.regex;
 
  import java.nio.charset.StandardCharsets;
  import java.security.MessageDigest;
- import java.security.NoSuchAlgorithmException;
+ import java.security.NoSuchAlgorithmException; */
 import java.util.ArrayList;
 import java.util.List;
  import java.util.Map;
 import java.util.Objects;
- import java.util.regex.Pattern;
+ //import java.util.regex.Pattern;
 
 import org.bson.Document;
 import org.bson.UuidRepresentation;
@@ -21,7 +21,7 @@ import org.mongojack.JacksonMongoCollection;
 
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Sorts;
-import com.mongodb.client.result.DeleteResult;
+//import com.mongodb.client.result.DeleteResult;
 
 import io.javalin.Javalin;
 import io.javalin.http.BadRequestResponse;
@@ -36,7 +36,7 @@ public class TodoController implements Controller {
   private static final String API_TODO_BY_ID = "/api/todos/{id}";
 
   static final String STATUS_KEY = "status";
-  private static final String STATUS_REGEX = "^(true|false)$";
+  //private static final String STATUS_REGEX = "^(true|false)$";
 
   static final String CATEGORY_KEY = "category";
   private static final String CATEGORY_REGEX = "^(homework|groceries|software design|video games)$";

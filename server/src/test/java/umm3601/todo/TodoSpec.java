@@ -36,7 +36,7 @@ void todosWithDifferentIdAreEqual() {
   assertFalse(todo1.equals(todo2));
 }
 
-void hashCodesAreBasedOnID(){
+void hashCodesAreBasedOnID() {
   todo1._id = FAKE_ID_STRING_1;
   todo2._id = FAKE_ID_STRING_1;
 

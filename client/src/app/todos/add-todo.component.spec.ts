@@ -13,7 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /* import { of, throwError } from 'rxjs';
  */
 import { AddTodoComponent } from './add-todo.component';
-import { MockTodoService } from '../../../../../../../../gilb0348/SoftwareDevClass/lab-4-linnea-andreas/client/src/testing/todo.service.mock';
+import { MockTodoService } from 'src/testing/todo.service.mock';
 import { TodoService } from './todo.service';
 
 
@@ -60,7 +60,7 @@ describe('AddTodoComponent', () => {
     expect(addTodoComponent).toBeTruthy();
     expect(addTodoForm).toBeTruthy();
   });
-  
+
   // Confirms that an initial, empty form is *not* valid, so
   // people can't submit an empty form.
   it('form should be invalid when empty', () => {

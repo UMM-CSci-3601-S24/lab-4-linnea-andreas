@@ -35,6 +35,7 @@ public class TodoController implements Controller {
   private static final String API_TODOS = "/api/todos";
   private static final String API_TODO_BY_ID = "/api/todos/{id}";
   static final String SORT_ORDER_KEY = "sortorder";
+  static final String SORT_BY_KEY = "sortby";
   static final String STATUS_KEY = "status";
 
   private final JacksonMongoCollection<Todo> todoCollection;

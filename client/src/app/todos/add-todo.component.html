@@ -1,0 +1,59 @@
+<div class="flex-row">
+  <div class="flex-1">
+    <form>
+      <mat-card class="add-user-card">
+        <mat-card-header>
+          <mat-card-title class="add-user-title">New Todo</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <div class="flex-col">
+
+            <mat-form-field>
+              <mat-label>Owner</mat-label>
+              <input matInput formControlName="owner"
+                required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select required formControlName="role">
+                <mat-option value="complete">Complete</mat-option>
+                <mat-option value="incomplete">Incomplete</mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Body</mat-label>
+              <input matInput formControlName="body" required>
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>category</mat-label>
+                <mat-select required formControlName="role">
+                  <mat-option value="groceries">Groceries</mat-option>
+                  <mat-option value="homework">Homework</mat-option>
+                  <mat-option value="software design">Software Design</mat-option>
+                  <mat-option value="video games">Video Games</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+          </div>
+
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button
+            mat-button
+            type="button"
+            color="primary"
+
+            type="submit"
+            data-test="confirmAddUserButton"
+            >
+            ADD TODO
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </div>
+</div>

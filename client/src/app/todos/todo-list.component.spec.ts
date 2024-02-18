@@ -40,3 +40,119 @@ const COMMON_IMPORTS: unknown[] = [
   BrowserAnimationsModule,
   RouterTestingModule,
 ];
+
+describe('TodoListComponent', () => {
+
+  // The `TodoListComponent` being tested
+  let todoList: TodoListComponent;
+  let fixture: ComponentFixture<TodoListComponent>;
+
+  // Set up the `TestBed` so that it uses
+  // a `MockTodoService` in place of the real `TodoService`
+  // for the purposes of the testing. We also have to include
+  // the relevant imports and declarations so that the tests
+  // can find all the necessary parts.
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+    imports: [COMMON_IMPORTS, TodoListComponent, TodoCardComponent],
+    // providers:    [ TodoService ]  // NO! Don't provide the real service!
+    // Provide a test-double instead
+    // This MockerTodoService is defined in client/testing/todo.service.mock.
+    providers: [{ provide: TodoService, useValue: new MockTodoService() }]
+});
+  });
+ // This constructs the `todoList` (declared
+  // above) that will be used throughout the tests.
+  beforeEach(waitForAsync(() => {
+    // Compile all the components in the test bed
+    // so that everything's ready to go.
+    TestBed.compileComponents().then(() => {
+      /* Create a fixture of the TodoListComponent. That
+      * allows us to get an instance of the component
+      * (todoList, below) that we can control in
+      * the tests.
+      */
+      fixture = TestBed.createComponent(TodoListComponent);
+      todoList = fixture.componentInstance;
+      /* Tells Angular to sync the data bindings between
+      * the model and the DOM. This ensures, e.g., that the
+      * `todoList` component actually requests the list
+      * of todos from the `MockTodoService` so that it's
+      * up to date before we start running tests on it.
+      */
+      fixture.detectChanges();
+    });
+  }));
+  it('contains all the todos', () => {
+    expect(todoList.serverFilteredTodos.length).toBe(3);
+  });
+
+  it('contains an owner called Chris', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Chris')).toBe(true);
+  });
+  it('contains an owner called Pat', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Pat')).toBe(true);
+  });
+  it('doesn\'t contain a user named \'Santa\'', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Santa')).toBe(false);
+  });
+
+});
+
+  describe('Misbehaving Todo List', () => {
+    let todoList: TodoListComponent;
+    let fixture: ComponentFixture<TodoListComponent>;
+
+    let todoServiceStub: {
+      getTodos: () => Observable<Todo[]>;
+    };
+
+    beforeEach(() => {
+      // stub TodoService for test purposes
+      todoServiceStub = {
+        getTodos: () => new Observable(observer => {
+          observer.error('getTodos() Observer generates an error');
+        }),
+      };
+
+      TestBed.configureTestingModule({
+      imports: [COMMON_IMPORTS, TodoListComponent],
+      // providers:    [ TodoService ]  // NO! Don't provide the real service!
+      // Provide a test-double instead
+      providers: [{ provide: TodoService, useValue: todoServiceStub }]
+  });
+    });
+
+    // Construct the `todoList` used for the testing in the `it` statement
+    // below.
+    beforeEach(waitForAsync(() => {
+      TestBed.compileComponents().then(() => {
+        fixture = TestBed.createComponent(TodoListComponent);
+        todoList = fixture.componentInstance;
+        fixture.detectChanges();
+      });
+    }));
+
+    it('fails to load todos if we do not set up a TodoListService', () => {
+      const mockedMethod = spyOn(todoList, 'getTodosFromServer').and.callThrough();
+      // Since calling both getTodos() and getTodosFiltered() return
+      // Observables that then throw exceptions, we don't expect the component
+      // to be able to get a list of todos, and serverFilteredTodos should
+      // be undefined.
+      expect(todoList.serverFilteredTodos)
+      .withContext('service can\'t give values to the list if it\'s not there')
+      .toBeUndefined();
+    expect(todoList.getTodosFromServer)
+      .withContext('will generate the right error if we try to getUsersFromServer')
+      .toThrow();
+    expect(mockedMethod)
+      .withContext('will be called')
+      .toHaveBeenCalled();
+    expect(todoList.errMsg)
+      .withContext('the error message will be')
+      .toContain('Problem contacting the server – Error Code:');
+      console.log(todoList.errMsg);
+    });
+
+});
+

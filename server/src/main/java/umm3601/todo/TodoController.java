@@ -44,6 +44,7 @@ public class TodoController implements Controller {
   static final String OWNER_KEY = "owner";
 
   static final String SORT_ORDER_KEY = "sortorder";
+  static final String SORT_BY_KEY = "sortby";
 
   private final JacksonMongoCollection<Todo> todoCollection;
 

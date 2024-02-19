@@ -23,7 +23,7 @@ getTodos(filters?: {status?: boolean}) : Observable<Todo[]> {
   //httpParams should be changed to let instead
   let httpParams: HttpParams = new HttpParams();
   if (filters) {
-    if (filters.status){
+    if (filters.status != undefined){
       httpParams = httpParams.set(this.statusKey, filters.status);
     }
   }

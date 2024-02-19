@@ -14,14 +14,19 @@ readonly todoUrl: string = `${environment.apiUrl}todos`;
 private readonly categoryKey = 'category'
 private readonly ownerKey = 'owner'
 private readonly bodyKey = 'body'
+private readonly statusKey = 'status'
 
 constructor(private httpClient: HttpClient) {
 }
 
-getTodos() : Observable<Todo[]> {
+getTodos(filters?: {status?: boolean}) : Observable<Todo[]> {
   //httpParams should be changed to let instead
-  const httpParams: HttpParams = new HttpParams();
-
+  let httpParams: HttpParams = new HttpParams();
+  if (filters) {
+    if (filters.status){
+      httpParams = httpParams.set(this.statusKey, filters.status);
+    }
+  }
 
   return this.httpClient.get<Todo[]>(this.todoUrl, {
     params: httpParams,

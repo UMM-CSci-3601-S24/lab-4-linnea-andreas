@@ -51,10 +51,11 @@ export class TodoListComponent implements OnInit, OnDestroy {
     }
 
     getTodosFromServer() {
-      this.todoService.getTodos(
+      this.todoService.getTodos({
         // Filter the users by category
         //category: this.todoCategory
-      ).pipe(
+        status: this.todoStatus
+    }).pipe(
         takeUntil(this.ngUnsubscribe)
       ).subscribe({
         next: (returnedTodos) => {
@@ -73,7 +74,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
             // The message will disappear after 6 seconds.
             { duration: 6000 });
         },
-      })
+      });
     }
     // public updateFilter() {
     //   this.filteredTodos = this.todoService.filterTodos(

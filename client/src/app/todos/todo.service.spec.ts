@@ -79,13 +79,33 @@ describe('TodoService', () => {
     }));
   });
 
+  describe('When getTodos() is called with parameters, it correctly forms the HTTP request (Javalin/Server filtering)', () => {
+
+    it('correctly calls api/todos with filter parameter \'status\'', () => {
+      const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testTodos));
+
+        todoService.getTodos({ status: true }).subscribe(() => {
+          expect(mockedMethod)
+            .withContext('one call')
+            .toHaveBeenCalledTimes(1);
+          // The mocked method should have been called with two arguments:
+          //   * the appropriate URL ('/api/todos' defined in the `todoService`)
+          //   * An options object containing an `HttpParams` with the `role`:`admin`
+          //     key-value pair.
+          expect(mockedMethod)
+            .withContext('talks to the correct endpoint')
+            .toHaveBeenCalledWith(todoService.todoUrl, { params: new HttpParams().set('status', true) });
+    });
+  });
+});
+
   describe('getTodoById()', () => {
     it('calls api/todos/id with the correct URL', () => {
       const targetTodo: Todo = testTodos[1];
       const targetId: string = targetTodo._id;
 
       // Mock the `httpClient.get()` method so that instead of making an HTTP request
-      // it just returns one user from our test data
+      // it just returns one todo from our test data
       const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(targetTodo));
 
       todoService.getTodoById(targetId).subscribe((todo) => {

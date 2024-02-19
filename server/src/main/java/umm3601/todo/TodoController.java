@@ -37,6 +37,7 @@ public class TodoController implements Controller {
   static final String SORT_ORDER_KEY = "sortorder";
   static final String SORT_BY_KEY = "sortby";
   static final String STATUS_KEY = "status";
+  static final String CATEGORY_KEY = "category";
 
   private final JacksonMongoCollection<Todo> todoCollection;
 
@@ -103,6 +104,12 @@ private Bson constructFilter(Context ctx) {
     .get();
     filters.add(eq(STATUS_KEY, targetStatus));
   }
+  if (ctx.queryParamMap().containsKey(CATEGORY_KEY)) {
+    String category = ctx.queryParamMap().get(CATEGORY_KEY).get(0).toLowerCase();
+    // .get();
+    filters.add(eq(CATEGORY_KEY, category));
+  }
+
   Bson combinedFilter = filters.isEmpty() ? new Document() : and(filters);
 
   return combinedFilter;

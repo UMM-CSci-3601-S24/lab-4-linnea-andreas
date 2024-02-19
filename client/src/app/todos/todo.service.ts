@@ -9,38 +9,43 @@ import { map } from 'rxjs/operators';
   providedIn: `root`
 })
 export class TodoService {
-//the URL for the todos part of the server API.
-readonly todoUrl: string = `${environment.apiUrl}todos`;
-private readonly categoryKey = 'category'
-private readonly ownerKey = 'owner'
-private readonly bodyKey = 'body'
+  //the URL for the todos part of the server API.
+  readonly todoUrl: string = `${environment.apiUrl}todos`;
+  private readonly categoryKey = 'category'
+  private readonly ownerKey = 'owner'
+  private readonly bodyKey = 'body'
 
-constructor(private httpClient: HttpClient) {
-}
+  constructor(private httpClient: HttpClient) {
+  }
 
-getTodos() : Observable<Todo[]> {
-  //httpParams should be changed to let instead
-  const httpParams: HttpParams = new HttpParams();
+  getTodos(): Observable<Todo[]> {
+    //httpParams should be changed to let instead
+    const httpParams: HttpParams = new HttpParams();
 
 
-  return this.httpClient.get<Todo[]>(this.todoUrl, {
-    params: httpParams,
-  });
-}
+    return this.httpClient.get<Todo[]>(this.todoUrl, {
+      params: httpParams,
+    });
+  }
 
-/**
-   * Get the `Todo` with the specified ID.
-   *
-   * @param id the ID of the desired todo
-   * @returns an `Observable` containing the resulting todo.
-   */
-getTodoById(id: string): Observable<Todo> {
-  // The input to get could also be written as (this.todoUrl + '/' + id)
-  return this.httpClient.get<Todo>(`${this.todoUrl}/${id}`);
-}
+  /**
+     * Get the `Todo` with the specified ID.
+     *
+     * @param id the ID of the desired todo
+     * @returns an `Observable` containing the resulting todo.
+     */
+  getTodoById(id: string): Observable<Todo> {
+    // The input to get could also be written as (this.todoUrl + '/' + id)
+    return this.httpClient.get<Todo>(`${this.todoUrl}/${id}`);
+  }
 
-addTodo(newTodo: Partial<Todo>): Observable<string> {
-  // Send post request to add a new user with the user data as the body.
-  return this.httpClient.post<{id: string}>(this.todoUrl, newTodo).pipe(map(res => res.id));
-}
+  addTodo(newTodo: Partial<Todo>): Observable<string> {
+    // Send post request to add a new user with the user data as the body.
+    return this.httpClient.post<{ id: string }>(this.todoUrl, newTodo).pipe(map(res => res.id));
+  }
+
+  filterTodos(serverFilteredTodos: Todo[], arg1: { body: string; owner: string; status: boolean; limit: any; }): Todo[] {
+    return serverFilteredTodos;
+  }
+
 }

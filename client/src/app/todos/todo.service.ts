@@ -15,11 +15,12 @@ private readonly categoryKey = 'category'
 private readonly ownerKey = 'owner'
 private readonly bodyKey = 'body'
 private readonly statusKey = 'status'
+private readonly sortByKey = 'sortby'
 
 constructor(private httpClient: HttpClient) {
 }
 
-getTodos(filters?: {status?: boolean, category?: string, owner?: string}) : Observable<Todo[]> {
+getTodos(filters?: {status?: boolean, category?: string, owner?: string, sortBy?: string}) : Observable<Todo[]> {
 
   let httpParams: HttpParams = new HttpParams();
   if (filters) {
@@ -31,6 +32,9 @@ getTodos(filters?: {status?: boolean, category?: string, owner?: string}) : Obse
     }
     if (filters.owner){
       httpParams = httpParams.set(this.ownerKey, filters.owner);
+    }
+    if (filters.sortBy){
+      httpParams = httpParams.set(this.sortByKey, filters.sortBy);
     }
   }
 

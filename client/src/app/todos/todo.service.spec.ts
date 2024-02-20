@@ -132,6 +132,23 @@ it('correctly calls api/todos with filter parameter \'owner\'', () => {
 });
 });
 
+it('correctly calls api/todos with sorting parameter \'sortby\'', () => {
+  const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testTodos));
+
+    todoService.getTodos({ sortBy: "body"}).subscribe(() => {
+      expect(mockedMethod)
+        .withContext('one call')
+        .toHaveBeenCalledTimes(1);
+      // The mocked method should have been called with two arguments:
+      //   * the appropriate URL ('/api/todos' defined in the `todoService`)
+      //   * An options object containing an `HttpParams` with the `role`:`admin`
+      //     key-value pair.
+      expect(mockedMethod)
+        .withContext('talks to the correct endpoint')
+        .toHaveBeenCalledWith(todoService.todoUrl, { params: new HttpParams().set('sortby', 'body') });
+});
+});
+
 });
 
   describe('getTodoById()', () => {

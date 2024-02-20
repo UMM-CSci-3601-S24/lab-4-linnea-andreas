@@ -97,6 +97,23 @@ describe('TodoService', () => {
             .toHaveBeenCalledWith(todoService.todoUrl, { params: new HttpParams().set('status', true) });
     });
   });
+
+  it('correctly calls api/todos with filter parameter \'category\'', () => {
+    const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testTodos));
+
+      todoService.getTodos({ category: 'video games' }).subscribe(() => {
+        expect(mockedMethod)
+          .withContext('one call')
+          .toHaveBeenCalledTimes(1);
+        // The mocked method should have been called with two arguments:
+        //   * the appropriate URL ('/api/todos' defined in the `todoService`)
+        //   * An options object containing an `HttpParams` with the `role`:`admin`
+        //     key-value pair.
+        expect(mockedMethod)
+          .withContext('talks to the correct endpoint')
+          .toHaveBeenCalledWith(todoService.todoUrl, { params: new HttpParams().set('category', 'video games') });
+  });
+});
 });
 
   describe('getTodoById()', () => {

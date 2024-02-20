@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 // import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
+// import static org.mockito.ArgumentMatchers.eq;
 // import static org.mockito.ArgumentMatchers.argThat;
 // import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.verify;
@@ -201,6 +202,25 @@ public class TodoControllerSpec {
     List<ArrayList<Todo>> todoList = todoArrayListCaptor.getAllValues();
     assertEquals(todoList.get(0).get(0).owner, "sam");
     assertEquals(todoList.get(0).get(3).owner, "Chris");
+  }
+  @Test
+  void canGetTodosWithCategory() throws IOException {
+    Map<String, List<String>> queryParams = new HashMap<>();
+    queryParams.put(TodoController.CATEGORY_KEY, Arrays.asList(new String[] {"Homework"}));
+
+    when(ctx.queryParamMap()).thenReturn(queryParams);
+    when(ctx.queryParam(TodoController.CATEGORY_KEY)).thenReturn("homework");
+
+
+    //.thenReturn(Validator.create(String.class, "homework", TodoController.CATEGORY_KEY));
+
+
+    todoController.getTodos(ctx);
+
+    verify(ctx).json(todoArrayListCaptor.capture());
+    verify(ctx).status(HttpStatus.OK);
+
+    assertEquals(1, todoArrayListCaptor.getValue().size());
   }
 
   @Test

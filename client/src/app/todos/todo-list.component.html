@@ -273,6 +273,19 @@
           <!-- </div> -->
           <div class="flex-row gap-8 flex-wrap">
 
+
+            <mat-form-field class="input-field">
+              <mat-label>Category</mat-label>
+              <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoCategory" data-test="todoCategorySelect">
+                <mat-option>--</mat-option>
+                <mat-option value="homework">Homework</mat-option>
+                <mat-option value="groceries">Groceries</mat-option>
+                <mat-option value="software design">Software Design</mat-option>
+                <mat-option value="video games">Video Games</mat-option>
+              </mat-select>
+              <mat-hint>Filtered on server</mat-hint>
+            </mat-form-field>
+
             <mat-form-field class="input-field">
               <mat-label>Status</mat-label>
               <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" data-test="todoStatusSelect">

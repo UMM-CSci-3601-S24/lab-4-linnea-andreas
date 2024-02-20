@@ -66,8 +66,6 @@ getTodos(filters?: {status?: boolean, category?: string, owner?: string, sortBy?
     return this.httpClient.post<{ id: string }>(this.todoUrl, newTodo).pipe(map(res => res.id));
   }
 
-  filterTodos(serverFilteredTodos: Todo[], arg1: { body: string; owner: string; status: boolean; limit: any; }): Todo[] {
-    return serverFilteredTodos;
-  }
+
 
 }

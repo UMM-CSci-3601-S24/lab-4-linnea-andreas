@@ -132,10 +132,10 @@ it('correctly calls api/todos with filter parameter \'owner\'', () => {
 });
 });
 
-it('correctly calls api/todos with sorting parameter \'sortby\'', () => {
+it('correctly calls api/todos with sorting parameter \'sortby\' and parameter body', () => {
   const mockedMethod = spyOn(httpClient, 'get').and.returnValue(of(testTodos));
 
-    todoService.getTodos({ sortBy: "body"}).subscribe(() => {
+    todoService.getTodos({ sortBy: "body", body: "testBody"}).subscribe(() => {
       expect(mockedMethod)
         .withContext('one call')
         .toHaveBeenCalledTimes(1);
@@ -145,7 +145,7 @@ it('correctly calls api/todos with sorting parameter \'sortby\'', () => {
       //     key-value pair.
       expect(mockedMethod)
         .withContext('talks to the correct endpoint')
-        .toHaveBeenCalledWith(todoService.todoUrl, { params: new HttpParams().set('sortby', 'body') });
+        .toHaveBeenCalledWith(todoService.todoUrl, { params: new HttpParams().set('sortby', 'body').set("body", "testBody") });
 });
 });
 

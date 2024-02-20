@@ -39,6 +39,7 @@ public class TodoController implements Controller {
   static final String STATUS_KEY = "status";
   static final String CATEGORY_KEY = "category";
   static final String OWNER_KEY = "owner";
+  static final String BODY_KEY = "body";
 
   private final JacksonMongoCollection<Todo> todoCollection;
 
@@ -114,6 +115,11 @@ private Bson constructFilter(Context ctx) {
     Pattern pattern = Pattern.compile(Pattern.quote(ctx.queryParam(OWNER_KEY)), Pattern.CASE_INSENSITIVE);
     filters.add(regex(OWNER_KEY, pattern));
   }
+  if (ctx.queryParamMap().containsKey(BODY_KEY)) {
+    Pattern pattern = Pattern.compile(Pattern.quote(ctx.queryParam(BODY_KEY)), Pattern.CASE_INSENSITIVE);
+    filters.add(regex(BODY_KEY, pattern));
+  }
+
 
   Bson combinedFilter = filters.isEmpty() ? new Document() : and(filters);
 

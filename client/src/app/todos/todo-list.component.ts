@@ -58,7 +58,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
         status: this.todoStatus,
         category: this.todoCategory,
         owner: this.todoOwner,
-        sortBy: this.todoSortBy
+        sortBy: this.todoSortBy,
+        body: this.todoBody
     }).pipe(
         takeUntil(this.ngUnsubscribe)
       ).subscribe({

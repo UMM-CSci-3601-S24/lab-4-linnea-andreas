@@ -19,8 +19,8 @@ private readonly statusKey = 'status'
 constructor(private httpClient: HttpClient) {
 }
 
-getTodos(filters?: {status?: boolean, category?: string}) : Observable<Todo[]> {
-  //httpParams should be changed to let instead
+getTodos(filters?: {status?: boolean, category?: string, owner?: string}) : Observable<Todo[]> {
+
   let httpParams: HttpParams = new HttpParams();
   if (filters) {
     if (filters.status != undefined){
@@ -28,6 +28,9 @@ getTodos(filters?: {status?: boolean, category?: string}) : Observable<Todo[]> {
     }
     if (filters.category){
       httpParams = httpParams.set(this.categoryKey, filters.category);
+    }
+    if (filters.owner){
+      httpParams = httpParams.set(this.ownerKey, filters.owner);
     }
   }
 

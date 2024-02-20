@@ -55,7 +55,8 @@ export class TodoListComponent implements OnInit, OnDestroy {
         // Filter the users by category
         //category: this.todoCategory
         status: this.todoStatus,
-        category: this.todoCategory
+        category: this.todoCategory,
+        owner: this.todoOwner
     }).pipe(
         takeUntil(this.ngUnsubscribe)
       ).subscribe({

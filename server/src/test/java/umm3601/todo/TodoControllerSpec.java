@@ -211,16 +211,28 @@ public class TodoControllerSpec {
     when(ctx.queryParamMap()).thenReturn(queryParams);
     when(ctx.queryParam(TodoController.CATEGORY_KEY)).thenReturn("homework");
 
-
-    //.thenReturn(Validator.create(String.class, "homework", TodoController.CATEGORY_KEY));
-
-
     todoController.getTodos(ctx);
 
     verify(ctx).json(todoArrayListCaptor.capture());
     verify(ctx).status(HttpStatus.OK);
 
     assertEquals(1, todoArrayListCaptor.getValue().size());
+  }
+
+  @Test
+  void canGetTodosWithPartialOwner() throws IOException {
+    Map<String, List<String>> queryParams = new HashMap<>();
+    queryParams.put(TodoController.OWNER_KEY, Arrays.asList(new String[] {"am"}));
+
+    when(ctx.queryParamMap()).thenReturn(queryParams);
+    when(ctx.queryParam(TodoController.OWNER_KEY)).thenReturn("am");
+
+    todoController.getTodos(ctx);
+
+    verify(ctx).json(todoArrayListCaptor.capture());
+    verify(ctx).status(HttpStatus.OK);
+
+    assertEquals(2, todoArrayListCaptor.getValue().size());
   }
 
   @Test

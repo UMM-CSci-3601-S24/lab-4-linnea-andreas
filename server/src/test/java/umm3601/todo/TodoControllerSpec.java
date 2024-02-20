@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 // import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.eq;
+// import static org.mockito.ArgumentMatchers.eq;
 // import static org.mockito.ArgumentMatchers.argThat;
 // import static org.mockito.ArgumentMatchers.same;
 import static org.mockito.Mockito.verify;
@@ -53,8 +53,7 @@ import io.javalin.http.NotFoundResponse;
 import io.javalin.json.JavalinJackson;
 // import io.javalin.validation.BodyValidator;
 // import io.javalin.validation.ValidationException;
-import io.javalin.validation.Validator;
-import umm3601.user.UserController;
+// import io.javalin.validation.Validator;
 
 
 /**

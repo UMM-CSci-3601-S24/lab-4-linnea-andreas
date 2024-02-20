@@ -234,6 +234,21 @@ public class TodoControllerSpec {
 
     assertEquals(2, todoArrayListCaptor.getValue().size());
   }
+  @Test
+  void canGetTodosWithPartialBody() throws IOException {
+    Map<String, List<String>> queryParams = new HashMap<>();
+    queryParams.put(TodoController.BODY_KEY, Arrays.asList(new String[] {"body"}));
+
+    when(ctx.queryParamMap()).thenReturn(queryParams);
+    when(ctx.queryParam(TodoController.BODY_KEY)).thenReturn("body");
+
+    todoController.getTodos(ctx);
+
+    verify(ctx).json(todoArrayListCaptor.capture());
+    verify(ctx).status(HttpStatus.OK);
+
+    assertEquals(3, todoArrayListCaptor.getValue().size());
+  }
 
   @Test
   void getTodoWithExistentID() throws IOException {

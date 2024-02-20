@@ -1,0 +1,106 @@
+<!-- @if (this.todo) {
+  <mat-card class="user-card">
+    <mat-card-header>
+      @if (this.todo.avatar) {
+        <img mat-card-avatar [src]="this.todo.avatar" alt="Avatar for {{this.todo.owner}}" class="todo-avatar">
+      }
+      <mat-card-title class="todo-card-name">{{ this.todo.owner }}</mat-card-title>
+      <mat-card-subtitle class="user-card-category">{{ this.todo.category }}</mat-card-subtitle>
+    </mat-card-header>
+    @if (!this.simple) {
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListItemIcon>dataset</mat-icon>
+            <p matListItemTitle>Status</p>
+
+            <p matListItemLine class="todo-card-status">{{ this.todo.status}}</p>
+          </mat-list-item>
+          <mat-divider [inset]=true></mat-divider>
+          <mat-list-item>
+            <mat-icon matListItemIcon>schedule</mat-icon>
+            <p matListItemTitle>Body</p>
+            <p matListItemLine class="todo-card-body">{{ this.todo.body }}</p>
+          </mat-list-item>
+          <mat-divider [inset]=true></mat-divider>
+        </mat-list>
+      </mat-card-content>
+    }
+    @if (this.simple) {
+      <mat-card-actions>
+        <button mat-button data-test="viewProfileButton" [routerLink]="['/todos', this.todo._id]">View Profile</button>
+      </mat-card-actions>
+    }
+</mat-card>
+} -->
+
+
+
+@if (this.todo) {
+  <mat-card appearance="outlined" class="todo-card">
+    <mat-card-header>
+      @if (this.todo.avatar) {
+      <img mat-card-avatar [src]="this.todo.avatar" alt="Avatar for {{this.todo.owner}}" class="todo-avatar">
+      }
+      <mat-card-title class="todo-card-owner">
+        <p>{{this.todo.owner}}</p>
+      </mat-card-title>
+      <mat-card-subtitle class="todo-card-category">{{ this.todo.category }}</mat-card-subtitle>
+    </mat-card-header>
+    @if (!this.simple) {
+    <mat-card-content>
+      <p>Status: <span [style.background-color]="todo.status ? 'green' : 'red'" matListItemLine class="todo-list-status">
+          {{todo.status ? 'Complete' : 'Incomplete'}}
+        </span>
+      </p>
+      <p class="todo-card-body">Body: <br><span>{{ this.todo.body }}</span></p>
+    </mat-card-content>
+    }
+    @if (this.simple) {
+    <mat-card-actions>
+      <button mat-button data-test="viewTodoButton" [routerLink]="['/todos', this.todo._id]">View Todo</button>
+    </mat-card-actions>
+    }
+  </mat-card>
+  }
+
+
+
+
+  <!--
+    <div class="flex-row">
+    @if (serverFilteredTodos) {
+      <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" >
+        <div>
+          <mat-card appearance="outlined">
+            <mat-card-content>
+              <mat-nav-list class="todo-nav-list">
+                <h3 mat-subheader>Todos</h3>
+                @for (todo of this.filteredTodos; track todo._id) {
+                  <a mat-list-item [routerLink]="['/todos', todo._id]" class="todo-list-item">
+                    <span matListItemTitle mat-line class="todo-list-owner"> {{todo.owner}} </span>
+                    <span matListItemLine class="todo-list-body"> {{todo.body}} </span>
+                    <span matListItemLine class="todo-list-status"> {{todo.status}} </span>
+                  </a>
+                }
+              </mat-nav-list>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    } @else {
+      <div class="flex-1" fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="user-error">
+        <mat-error>
+          There was a problem loading the users. Possibly the server is down or perhaps there are network
+          issues.
+        </mat-error>
+        <mat-error>
+          Error message: {{ this.errMsg }}
+        </mat-error>
+        <mat-error>
+          Please wait a bit and try again or start the server.
+        </mat-error>
+      </div>
+    }
+  </div>
+-->

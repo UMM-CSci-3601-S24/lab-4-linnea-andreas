@@ -34,7 +34,11 @@ export class TodoListComponent implements OnInit, OnDestroy {
   public todoStatus: boolean;
   public todoCategory: string;
   public todoBody: string;
+
   public todoSortBy: string;
+
+  public limit: number;
+
   public viewType: 'card' | 'list' = 'card';
 
   errMsg = '';
@@ -65,7 +69,7 @@ export class TodoListComponent implements OnInit, OnDestroy {
       ).subscribe({
         next: (returnedTodos) => {
           this.serverFilteredTodos = returnedTodos;
-          //this.updateFilter();
+          this.updateFilter();
         },
         error: (err) => {
           if (err.error instanceof ErrorEvent) {
@@ -81,11 +85,13 @@ export class TodoListComponent implements OnInit, OnDestroy {
         },
       });
     }
-    // public updateFilter() {
-    //   this.filteredTodos = this.todoService.filterTodos(
-    //     this.serverFilteredTodos, { body: this.todoBody, owner: this.todoOwner, status: this.todoStatus, limit: this.limit }
-    //   )
-    // }
+
+    public updateFilter() {
+      this.filteredTodos = this.todoService.filterTodos(
+        this.serverFilteredTodos, { body: this.todoBody, owner: this.todoOwner, status: this.todoStatus, limit: this.limit }
+      )
+    }
+
     ngOnInit(): void {
       this.getTodosFromServer();
     }

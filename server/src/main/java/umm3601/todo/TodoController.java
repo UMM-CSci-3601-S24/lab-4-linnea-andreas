@@ -2,16 +2,20 @@ package umm3601.todo;
 
 import static com.mongodb.client.model.Filters.and;
 import static com.mongodb.client.model.Filters.eq;
+
 import static com.mongodb.client.model.Filters.regex;
 
-// import java.nio.charset.StandardCharsets;
-// import java.security.MessageDigest;
-// import java.security.NoSuchAlgorithmException;
+
+ import java.nio.charset.StandardCharsets;
+ import java.security.MessageDigest;
+ import java.security.NoSuchAlgorithmException; */
 import java.util.ArrayList;
 import java.util.List;
-// import java.util.Map;
+ import java.util.Map;
 import java.util.Objects;
+
 import java.util.regex.Pattern;
+
 
 import org.bson.Document;
 import org.bson.UuidRepresentation;
@@ -34,8 +38,18 @@ public class TodoController implements Controller {
 
   private static final String API_TODOS = "/api/todos";
   private static final String API_TODO_BY_ID = "/api/todos/{id}";
+
+  static final String STATUS_KEY = "status";
+  //private static final String STATUS_REGEX = "^(true|false)$";
+
+  static final String CATEGORY_KEY = "category";
+  private static final String CATEGORY_REGEX = "^(homework|groceries|software design|video games)$";
+
+  static final String OWNER_KEY = "owner";
+
   static final String SORT_ORDER_KEY = "sortorder";
   static final String SORT_BY_KEY = "sortby";
+
   static final String STATUS_KEY = "status";
   static final String CATEGORY_KEY = "category";
   static final String OWNER_KEY = "owner";
@@ -126,6 +140,30 @@ private Bson constructFilter(Context ctx) {
   return combinedFilter;
 
 }
+
+public void addNewTodo(Context ctx) {
+
+  Todo newTodo = ctx.bodyValidator(Todo.class)
+    .check(todo -> todo.owner != null && todo.owner.length() > 0, "Owner must have a non-empty owner")
+    .check(todo -> todo.body != null && todo.body.length() > 0, "Body must have a non-empty body")
+    .check(todo -> todo.category.matches(CATEGORY_REGEX), "Status must have a legal status")
+/*     .check(todo -> todo.status.matches(STATUS_REGEX), "Status must have a legal status")
+ */    .get();
+
+  // Insert the new todo into the database
+  todoCollection.insertOne(newTodo);
+
+  // Set the JSON response to be the `_id` of the newly created user.
+  // This gives the client the opportunity to know the ID of the new user,
+  // which it can use to perform further operations (e.g., display the user).
+  ctx.json(Map.of("id", newTodo._id));
+  // 201 (`HttpStatus.CREATED`) is the HTTP code for when we successfully
+  // create a new resource (a user in this case).
+  // See, e.g., https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+  // for a description of the various response codes.
+  ctx.status(HttpStatus.CREATED);
+}
+
 private Bson constructSortingOrder(Context ctx) {
   // Sort the results. Use the `sortby` query param (default "name")
   // as the field to sort by, and the query param `sortorder` (default

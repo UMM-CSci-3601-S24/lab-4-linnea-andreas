@@ -20,7 +20,7 @@ private readonly sortByKey = 'sortby'
 constructor(private httpClient: HttpClient) {
 }
 
-getTodos(filters?: {status?: boolean, category?: string, owner?: string, sortBy?: string}) : Observable<Todo[]> {
+getTodos(filters?: {status?: boolean, category?: string, owner?: string, sortBy?: string, body?: string}) : Observable<Todo[]> {
 
   let httpParams: HttpParams = new HttpParams();
   if (filters) {
@@ -35,6 +35,9 @@ getTodos(filters?: {status?: boolean, category?: string, owner?: string, sortBy?
     }
     if (filters.sortBy){
       httpParams = httpParams.set(this.sortByKey, filters.sortBy);
+    }
+    if (filters.body){
+      httpParams = httpParams.set(this.bodyKey, filters.body);
     }
   }
 
